@@ -10,7 +10,6 @@ export class CachingService {
     const options: LRUCache.Options<string, any, any> = {
       max: 100,
       maxSize: 1000000,
-      ttl: 15 * 60 * 1000,
       sizeCalculation: (value: Buffer) => {
         return value.byteLength;
       },
