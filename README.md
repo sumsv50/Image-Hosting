@@ -1,73 +1,67 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Free Image Hosting
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This service offers two primary features:
+1.  **Image Upload**: Users can easily upload images.
+2.  **On-the-fly Image Resizing**: Images can be resized to specific dimensions as needed.
 
-## Description
+**[HOT]** The service is already deployed and accessible at http://image-hosting-adoo.onrender.com. Feel free to give it a try! <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXE0Z216dWk4MmNvNjRjdjhqeW52bTN0NW16Y3h1OXYzeDBqbTJ5aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/ewh4ipgPw1bBVj4HI5/giphy.gif" width="29px" height="29px">
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## How to use
 
-## Installation
+### Image Upload
+To upload an image, simply make a call to the following API:
+- **URL**: [Domain]/public/images
+- **Method**: POST
+- **Content-Type**: multipart/form-data
+- **Body**:
+
+  |Key|Value type|Description|
+  |-|-|-|
+  |image|\<binary\>| Your image|
+
+
+*Request example:*
 
 ```bash
-$ npm install
+curl --location --request POST 'https://image-hosting-adoo.onrender.com/public/images' \
+--form 'image=@"/Users/sum.d/Downloads/your-image.jpg"'
 ```
 
-## Running the app
+
+Response
+
+- **Content-Type**: application/json
+- **Body**
+
+    |Key|Value type|Description|
+    |-|-|-|
+    |url|string|Upload image link|
+
+*Response example:*
+
+```json
+{
+  "url": "https://image-hosting-adoo.onrender.com/public/images/Cat03_xhwix8.jpg"
+}
+```
+
+### Image Resizing
+
+Resizing your uploaded image is simple. Just append the desired dimensions to the image URL as query parameters:
+
+  | Parameter name| Required | Value type | Description |
+  | - | - | - | - |
+  | width | No | number | Desired width of the image |
+  | height | No | number | Desired height of the image |
+
+*Request example*:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+curl --location --request GET 'https://image-hosting-adoo.onrender.com/public/images/Cat03_xhwix8.jpg?width=500&height=500'
 ```
 
-## Test
+## Show Your Support
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Please ⭐️ this repository if this project helped you!
